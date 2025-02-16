@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/profile", {
+      const res = await fetch("https://imepsapi.onrender.com/profile", {
         headers: {
           authorization: `${token}`,
         },
@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const res = await fetch("http://localhost:3000/login", {
+      const res = await fetch("https://imepsapi.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (formData) => {
-    const res = await fetch("http://localhost:3000/register", {
+    const res = await fetch("https://imepsapi.onrender.com/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

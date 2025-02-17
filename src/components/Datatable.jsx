@@ -78,7 +78,7 @@ export default function Datatable({ entity, allEntities = [] }) {
   }, [entity.url]);
 
   const refreshRows = async () => {
-    const res = await fetch(`https://imepsapi.onrender.com${entity.url}`, {
+    const res = await fetch(`http://localhost:3000${entity.url}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: localStorage.getItem("token"),
@@ -110,15 +110,12 @@ export default function Datatable({ entity, allEntities = [] }) {
     const resourceEntity = allEntities[resourceIdx];
     if (!resourceEntity) return; // safety check
 
-    const res = await fetch(
-      `https://imepsapi.onrender.com${resourceEntity.url}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+    const res = await fetch(`http://localhost:3000${resourceEntity.url}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+    });
     const data = await res.json();
     setResourcesMap((prev) => ({
       ...prev,
@@ -220,7 +217,7 @@ export default function Datatable({ entity, allEntities = [] }) {
 
   // CREATE
   const handleCreate = async () => {
-    await fetch(`https://imepsapi.onrender.com${entity.url}`, {
+    await fetch(`http://localhost:3000${entity.url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -235,17 +232,14 @@ export default function Datatable({ entity, allEntities = [] }) {
 
   // UPDATE
   const handleUpdate = async () => {
-    await fetch(
-      `https://imepsapi.onrender.com${entity.url}/${selectedRow.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: localStorage.getItem("token"),
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    await fetch(`http://localhost:3000${entity.url}/${selectedRow.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(formData),
+    });
     setOpenUpdate(false);
     refreshRows();
     setFormData({});
@@ -254,16 +248,13 @@ export default function Datatable({ entity, allEntities = [] }) {
 
   // DELETE
   const handleDelete = async () => {
-    await fetch(
-      `https://imepsapi.onrender.com${entity.url}/${selectedRow.id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+    await fetch(`http://localhost:3000${entity.url}/${selectedRow.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+    });
     setOpenDelete(false);
     refreshRows();
     setSelectedRow(null);
